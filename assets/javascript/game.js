@@ -1,68 +1,175 @@
-//Global Variable Declarations
+window.onload = function () {
 
-var wordList = ["orbit","eclipse","singularity","interstellar","gravity","planet",
-    "meteorite","constellation","solar","antares","galaxy","supernova"];
+    // Variable Declarations
 
-var chosenWord = wordList[Math.floor(Math.random()*wordList.length)];
+    var remainingGuesses = 6;
 
-var maxGuesses = 12;
+    var winCount = 0;
+
+    var update = "";
+
+    var wordList;
+
+    var word;
+
+    var split;
+
+    var sl;
+
+    var blankSpaces = []
+
+    var blanks;
+
+    var ct;
+
+    var checkThis;
+
+    var hit;
+
+    var playerChoice;
+
+    var keyDiv = document.getElementById("taken");
+
+    // var alreadyP = []
+
+    //------------------------------------------------------------------------------------------------//
+
+    // Function Declarations
 
 
+    function overview() {
+
+        // Ensure variables are at starting position
+        remainingGuesses = 6;
+        update = "";
+        wordList = undefined;
+        word = undefined;
+        split = undefined;
+        sl = undefined;
+        blankSpaces = []
+        blanks = undefined;
+        ct = undefined;
+        checkThis = undefined;
+        // alreadyP = []
+
+        //Set data to be shown on load or page refresh
+        document.getElementById("guess-count").innerHTML = remainingGuesses;
+        document.getElementById("win-count").innerHTML = winCount;
+        document.getElementById("word-holder").innerHTML = blanks;
+
+        // Choose word for player to guess and store result
+        wordList = ["orbit", "eclipse", "singularity", "interstellar", "gravity", "planet",
+            "meteorite", "constellation", "solar", "antares", "galaxy", "supernova"
+        ]
+
+        word = wordList[Math.floor(Math.random() * wordList.length)];
+
+        console.log(word);
+
+        split = Array.from(word);
+
+        sl = split.length;
 
 
-// Function Declarations
+        //Create placeholders for where player input will be displayed
 
-function resetGuess () {
+        for (var a = 0; a < sl; a++) {
+            blankSpaces.push("_ ");
+        }
 
-    document.getElementById("guess-count").innerHTML = maxGuesses;
-}
+        blanks = blankSpaces.join("");
 
-function chooseAWord(word) {
+        document.getElementById("word-holder").innerHTML = blanks;
 
-    var separate = Array.from(word);
+        ct = blanks.split(" ");
 
-    for (var a = 0; a < separate.length; a++) {
-        separate[a] = "_ ";
+        checkThis = ct.slice(0, [ct.length - 1]);
+
     }
 
-    var inGoes = separate.join(" ");
 
-    document.getElementById("word-holder").innerHTML = inGoes;
-}
+    // Check if player input matches expected answer
+    // Display player input in matching space if correct, decrement player's remaining guesses if incorrect
+    function guessChecker(letter) {
 
+        var present = false;
 
-function keyLogger() {
+        for (var b = 0; b < sl; b++) {
+            if (word.charAt(b) == letter) {
+                present = true;
+            }
+        }
 
-    document.onkeypress = function(event) {
+        if (present) {
+            for (var b = 0; b < sl; b++) {
+                if (word.charAt(b) == letter) {
+                    checkThis[b] = word.charAt(b);
+                    update = checkThis.join(" ");
+                    document.getElementById("word-holder").innerHTML = update;
 
-        var hit = event.key;
+                }
+            }
+        } else {
+            remainingGuesses--;
+            document.getElementById("guess-count").innerHTML = remainingGuesses;
+        }
 
-        var res = hit.toUpperCase();
+        // console.log(update);
+        // console.log(winCount);
 
-        var keyDiv = document.getElementById("taken");
-
-        keyDiv.insertAdjacentHTML("beforeend", res + " ");
-
-        for (var i = 0; i < str.length; i++) {
-            alert(str.charAt(i));
-          }
-        
-        
-        /*if (hit == chosenWord) {
-            //replace chosenWord with hit
-        } else
-        {
-            //decrement guess counter
-        } */
     }
-}
+
+    // Check if player has won or lost, increment accordingly and choose new word
+    function nextRound() {
+
+        let str = update.split(" ").join("");
+        // console.log(keyDiv);
+
+        if (str == word) {
+            winCount++;
+            document.getElementById("win-count").innerHTML = winCount;
+            remainingGuesses = 6;
+            blanks = undefined;
+            keyDiv.innerText = "";
+            overview();
+        } else {
+            if (remainingGuesses == 0) {
+            remainingGuesses = 6;
+            blanks = undefined;
+            keyDiv.innerText = "";
+            overview();
+            } else {
+                return;
+            }
+        }
+    }
 
 
 
-//Game
 
-resetGuess();
+    // Called to start game
+    overview();
 
-chooseAWord(chosenWord);
 
-keyLogger();
+    // Event handler for player input
+    document.onkeypress = function (event) {
+
+        hit = event.key;
+
+        playerChoice = hit.toLowerCase();
+
+        // alreadyP.push(playerChoice);
+        // console.log(alreadyP);
+        // console.log(playerChoice);
+
+        // if (alreadyP.indexOf(playerChoice) == -1) {
+        keyDiv.insertAdjacentText("beforeend", playerChoice + " ");
+        // }
+
+        guessChecker(playerChoice);
+
+        nextRound();
+
+    }
+
+};
