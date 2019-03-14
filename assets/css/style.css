@@ -1,0 +1,22 @@
+body {
+    font-family: 'Special Elite', cursive;
+    color: white;
+    background-color: black;
+    background-image: url("../images/nebula.png");
+    background-repeat: no-repeat;
+    background-blend-mode: screen;
+}
+
+.jumbotron {
+    text-align: center;
+    font-size: 2rem;
+    background-color: black;
+}
+
+.card {
+    background-color: black;
+}
+
+#hideFor {
+    color: black;
+}

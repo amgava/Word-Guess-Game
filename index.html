@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Word Guess</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+</head>
+    <body>
+
+        <!-- Layout -->
+        <div class="background">
+
+            <!-- Heading -->
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <p>
+                        Hangman In Space!
+                    </p>
+                </div>
+            </div>
+
+            <!-- User Input -->
+            <div class="container" id="game-box">
+                <div class="row">
+
+                    <div class="col-sm-6">
+
+                        <div class="card">
+
+                            <div class="card-body" id="left-side">
+
+                                <div id="how-to">
+                                    <p>
+                                        Press any letter to start!
+                                    </p>
+                                </div>
+
+                                <div id="user-progress">
+                                    <p>
+                                        Wins:<span id="win-count"></span>
+                                    </p>
+                                </div>
+
+                                <div class="hFor" id="hideFor">
+                                    <p>
+                                        hideFor<span>hideForCSS</span><br>
+                                        additionaldummytextforCSS
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <div class="card">
+
+                            <div class="card-body" id="right-side">
+
+                                <div id="word-holder"></div>
+
+                                <div id="how-many">
+                                    <p>
+                                        Number Of Guesses Remaining: <span id="guess-count"></span>
+                                    </p>
+                                </div>
+
+                                <div id="already-guessed">
+                                    <p>
+                                        Letters Already Guessed:
+                                    </p>
+                                    <p id="taken"></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Game Script -->
+        <script src="./assets/javascript/game-import.js"></script>
+
+    </body>
+
+</html>
