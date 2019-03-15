@@ -30,7 +30,7 @@ window.onload = function () {
 
     var keyDiv = document.getElementById("taken");
 
-    // var alreadyP = []
+    var alreadyP = []
 
     //------------------------------------------------------------------------------------------------//
 
@@ -50,7 +50,7 @@ window.onload = function () {
         blanks = undefined;
         ct = undefined;
         checkThis = undefined;
-        // alreadyP = []
+        alreadyP = []
 
         //Set data to be shown on load or page refresh
         document.getElementById("guess-count").innerHTML = remainingGuesses;
@@ -158,13 +158,10 @@ window.onload = function () {
 
         playerChoice = hit.toLowerCase();
 
-        // alreadyP.push(playerChoice);
-        // console.log(alreadyP);
-        // console.log(playerChoice);
-
-        // if (alreadyP.indexOf(playerChoice) == -1) {
-        keyDiv.insertAdjacentText("beforeend", playerChoice + " ");
-        // }
+        if (alreadyP.indexOf(playerChoice) == -1) {
+            alreadyP.push(playerChoice);
+            keyDiv.insertAdjacentText("beforeend", playerChoice + " ");
+        }
 
         guessChecker(playerChoice);
 
